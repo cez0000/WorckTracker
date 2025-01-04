@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    @if(User.Identity.IsAuthenticated)
+    {
+        @if(User.IsInRole("Admin"))
+        {
+            <h1 class="display-4">Welcome to Admin Panel!</h1>
+        }
+        else
+        {
+            <h1 class="display-4">Welcome to Employee Panel!</h1>
+        }
+    }
+
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <h1 class="display-4">Welcome to WorkTracker!</h1>
+        <div class="mt-4">
+            <h3 class="mb-3">Not logged in?</h3>
+            <p>
+                To get started, please
+                <a href="/Identity/Account/Login" class="btn btn-primary">Log In</a> or
+                <a href="/Identity/Account/Register" class="btn btn-secondary">Register</a> a new account.
+            </p>
+        </div>
+    }
+</div>

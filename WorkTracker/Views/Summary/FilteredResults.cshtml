@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WorkTracker.Models.ActivityStatisticsViewModel>
+
+@{
+    ViewData["Title"] = "Summary";
+    var filter = ViewBag.Filter as WorkTracker.Models.ActivityFilterViewModel;
+}
+<h1 class="mb-4">Activity Summary</h1>
+@if (filter != null)
+{
+    <p class="text-muted">
+        Selected Period:
+        <strong>@filter.StartDate.Value.ToString("yyyy-MM-dd")</strong>
+        -
+        <strong>@filter.EndDate.Value.ToString("yyyy-MM-dd")</strong>
+    </p>
+}
+
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th>Employee Email</th>
+            <th>Activity</th>
+            <th>Total Hours</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var stat in Model)
+        {
+            <tr>
+                <td>@stat.EmployeeEmail</td>
+                <td>@stat.Activity</td>
+                <td>@stat.TotalHours</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="mt-4">
+    <a href="@Url.Action("Index", "Summary")" class="btn btn-secondary">Change Period</a>
+</div>
