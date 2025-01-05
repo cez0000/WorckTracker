@@ -83,7 +83,7 @@ namespace WorkTracker.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ActivityTypeId"] = new SelectList(_context.ActivityType, "Id", "Id", activity.ActivityTypeId);
+            ViewData["ActivityTypeId"] = new SelectList(_context.ActivityType, "Id", "Name", activity.ActivityTypeId);
             return View(activity);
         }
 

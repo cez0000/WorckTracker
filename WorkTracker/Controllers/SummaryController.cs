@@ -42,12 +42,24 @@ namespace WorkTracker.Controllers
                 {
                     EmployeeEmail = group.Key.Email,
                     Activity = group.Key.Name,
-                    TotalHours = group.Sum(a => a.Duration.TotalHours).ToString("F2"),
+                    TotalHours = FormatDuration(group.Sum(a => a.Duration.TotalHours)),
                 })
                 .ToList();
 
             ViewBag.Filter = filter;
             return View("FilteredResults", statistics);
         }
+        private string FormatDuration(double totalHours)
+        {
+
+            int hours = (int)totalHours;
+
+
+            int minutes = (int)((totalHours - hours) * 60);
+
+
+            return $"{hours:D2}:{minutes:D2}";
+        }
     }
+    
 }
